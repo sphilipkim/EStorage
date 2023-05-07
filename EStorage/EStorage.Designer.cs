@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            button_search = new Button();
             comboBox_com = new ComboBox();
             groupBox_scanner = new GroupBox();
             label_scanner_status = new Label();
@@ -49,20 +48,20 @@
             textBox_item_count = new TextBox();
             label_item_name = new Label();
             textBox_item_name = new TextBox();
+            listBox = new ListBox();
+            groupBox_search = new GroupBox();
+            comboBox_search_category = new ComboBox();
+            comboBox_search_size = new ComboBox();
+            label_search_category = new Label();
+            label_search_size = new Label();
+            label_search_name = new Label();
+            textBox_search_name = new TextBox();
+            groupBox_history = new GroupBox();
             groupBox_scanner.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)bindingSource1).BeginInit();
             groupBox_item.SuspendLayout();
+            groupBox_search.SuspendLayout();
             SuspendLayout();
-            // 
-            // button_search
-            // 
-            button_search.Location = new Point(25, 33);
-            button_search.Name = "button_search";
-            button_search.Size = new Size(186, 57);
-            button_search.TabIndex = 0;
-            button_search.Text = "Search Item";
-            button_search.UseVisualStyleBackColor = true;
-            button_search.Click += button1_Click;
             // 
             // comboBox_com
             // 
@@ -79,9 +78,9 @@
             groupBox_scanner.Controls.Add(progressBar_com);
             groupBox_scanner.Controls.Add(label_com);
             groupBox_scanner.Controls.Add(comboBox_com);
-            groupBox_scanner.Location = new Point(25, 338);
+            groupBox_scanner.Location = new Point(387, 348);
             groupBox_scanner.Name = "groupBox_scanner";
-            groupBox_scanner.Size = new Size(210, 100);
+            groupBox_scanner.Size = new Size(210, 98);
             groupBox_scanner.TabIndex = 2;
             groupBox_scanner.TabStop = false;
             groupBox_scanner.Text = "Scanner";
@@ -127,7 +126,7 @@
             groupBox_item.Controls.Add(textBox_item_count);
             groupBox_item.Controls.Add(label_item_name);
             groupBox_item.Controls.Add(textBox_item_name);
-            groupBox_item.Location = new Point(387, 33);
+            groupBox_item.Location = new Point(12, 12);
             groupBox_item.Name = "groupBox_item";
             groupBox_item.Size = new Size(369, 223);
             groupBox_item.TabIndex = 3;
@@ -151,7 +150,7 @@
             button_item_update.TabIndex = 15;
             button_item_update.Text = "Update";
             button_item_update.UseVisualStyleBackColor = true;
-            button_item_update.Click += button_item_update_category_Click;
+            button_item_update.Click += button_item_update_Click;
             // 
             // button_item_remove
             // 
@@ -220,6 +219,7 @@
             // 
             // textBox_item_count
             // 
+            textBox_item_count.Enabled = false;
             textBox_item_count.Location = new Point(87, 63);
             textBox_item_count.Name = "textBox_item_count";
             textBox_item_count.ReadOnly = true;
@@ -237,20 +237,112 @@
             // 
             // textBox_item_name
             // 
+            textBox_item_name.Enabled = false;
             textBox_item_name.Location = new Point(87, 34);
             textBox_item_name.Name = "textBox_item_name";
             textBox_item_name.ReadOnly = true;
             textBox_item_name.Size = new Size(261, 23);
             textBox_item_name.TabIndex = 0;
             // 
+            // listBox
+            // 
+            listBox.FormattingEnabled = true;
+            listBox.ItemHeight = 15;
+            listBox.Location = new Point(6, 22);
+            listBox.Name = "listBox";
+            listBox.Size = new Size(389, 214);
+            listBox.TabIndex = 4;
+            listBox.DoubleClick += listBox_DoubleClick;
+            // 
+            // groupBox_search
+            // 
+            groupBox_search.Controls.Add(comboBox_search_category);
+            groupBox_search.Controls.Add(comboBox_search_size);
+            groupBox_search.Controls.Add(label_search_category);
+            groupBox_search.Controls.Add(label_search_size);
+            groupBox_search.Controls.Add(label_search_name);
+            groupBox_search.Controls.Add(textBox_search_name);
+            groupBox_search.Controls.Add(listBox);
+            groupBox_search.Location = new Point(387, 12);
+            groupBox_search.Name = "groupBox_search";
+            groupBox_search.Size = new Size(401, 330);
+            groupBox_search.TabIndex = 5;
+            groupBox_search.TabStop = false;
+            groupBox_search.Text = "Search";
+            // 
+            // comboBox_search_category
+            // 
+            comboBox_search_category.FormattingEnabled = true;
+            comboBox_search_category.Items.AddRange(new object[] { "", "Christmas", "Halloween", "Thanksgiving", "Easter", "Valentines", "New Years" });
+            comboBox_search_category.Location = new Point(75, 300);
+            comboBox_search_category.Name = "comboBox_search_category";
+            comboBox_search_category.Size = new Size(149, 23);
+            comboBox_search_category.TabIndex = 17;
+            comboBox_search_category.SelectedIndexChanged += comboBox_search_category_SelectedIndexChanged;
+            // 
+            // comboBox_search_size
+            // 
+            comboBox_search_size.FormattingEnabled = true;
+            comboBox_search_size.Items.AddRange(new object[] { "", "Large", "Medium", "Small", "Large Tumbler", "Medium Tumbler", "Small Tumbler" });
+            comboBox_search_size.Location = new Point(75, 271);
+            comboBox_search_size.Name = "comboBox_search_size";
+            comboBox_search_size.Size = new Size(149, 23);
+            comboBox_search_size.TabIndex = 16;
+            comboBox_search_size.SelectedIndexChanged += comboBox_search_size_SelectedIndexChanged;
+            // 
+            // label_search_category
+            // 
+            label_search_category.AutoSize = true;
+            label_search_category.Location = new Point(7, 303);
+            label_search_category.Name = "label_search_category";
+            label_search_category.Size = new Size(55, 15);
+            label_search_category.TabIndex = 15;
+            label_search_category.Text = "Category";
+            // 
+            // label_search_size
+            // 
+            label_search_size.AutoSize = true;
+            label_search_size.Location = new Point(7, 274);
+            label_search_size.Name = "label_search_size";
+            label_search_size.Size = new Size(27, 15);
+            label_search_size.TabIndex = 14;
+            label_search_size.Text = "Size";
+            // 
+            // label_search_name
+            // 
+            label_search_name.AutoSize = true;
+            label_search_name.Location = new Point(7, 245);
+            label_search_name.Name = "label_search_name";
+            label_search_name.Size = new Size(39, 15);
+            label_search_name.TabIndex = 13;
+            label_search_name.Text = "Name";
+            // 
+            // textBox_search_name
+            // 
+            textBox_search_name.Location = new Point(75, 242);
+            textBox_search_name.Name = "textBox_search_name";
+            textBox_search_name.Size = new Size(320, 23);
+            textBox_search_name.TabIndex = 12;
+            textBox_search_name.TextChanged += textBox_search_name_TextChanged;
+            // 
+            // groupBox_history
+            // 
+            groupBox_history.Location = new Point(12, 242);
+            groupBox_history.Name = "groupBox_history";
+            groupBox_history.Size = new Size(369, 204);
+            groupBox_history.TabIndex = 6;
+            groupBox_history.TabStop = false;
+            groupBox_history.Text = "groupBox1";
+            // 
             // title
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(groupBox_history);
+            Controls.Add(groupBox_search);
             Controls.Add(groupBox_item);
             Controls.Add(groupBox_scanner);
-            Controls.Add(button_search);
             Name = "title";
             Text = "E-Storage";
             FormClosing += title_FormClosing;
@@ -260,12 +352,12 @@
             ((System.ComponentModel.ISupportInitialize)bindingSource1).EndInit();
             groupBox_item.ResumeLayout(false);
             groupBox_item.PerformLayout();
+            groupBox_search.ResumeLayout(false);
+            groupBox_search.PerformLayout();
             ResumeLayout(false);
         }
 
         #endregion
-
-        private Button button_search;
         private ComboBox comboBox_com;
         private GroupBox groupBox_scanner;
         private Label label_com;
@@ -286,5 +378,14 @@
         private Button button_item_add;
         private Button button_item_update;
         private Button button_item_admin;
+        private ListBox listBox;
+        private GroupBox groupBox_search;
+        private ComboBox comboBox_search_category;
+        private ComboBox comboBox_search_size;
+        private Label label_search_category;
+        private Label label_search_size;
+        private Label label_search_name;
+        private TextBox textBox_search_name;
+        private GroupBox groupBox_history;
     }
 }

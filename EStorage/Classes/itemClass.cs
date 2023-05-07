@@ -52,6 +52,158 @@ namespace EStorage.Classes
             return dt;
         }
 
+        //Select, show only names
+        public DataTable SelectNames()
+        {
+            SqlConnection connect = new SqlConnection(connString);
+            DataTable dt = new DataTable();
+
+            try
+            {
+                string sql = "SELECT itemName FROM items";
+                SqlCommand cmd = new SqlCommand(sql, connect);
+
+                SqlDataAdapter ad = new SqlDataAdapter(cmd);
+
+                connect.Open();
+                ad.Fill(dt);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("DB SELECT ERROR: " + ex);
+            }
+            finally
+            {
+                connect.Close();
+            }
+
+            return dt;
+        }
+
+        //Select Search by name
+        public DataTable SearchByName(string search)
+        {
+            SqlConnection connect = new SqlConnection(connString);
+            DataTable dt = new DataTable();
+
+            try
+            {
+                string sql = "SELECT itemName FROM items WHERE itemName LIKE '%' + @search + '%'";
+                SqlCommand cmd = new SqlCommand(sql, connect);
+
+                cmd.Parameters.AddWithValue("@search", search);
+
+                SqlDataAdapter ad = new SqlDataAdapter(cmd);
+
+                connect.Open();
+                ad.Fill(dt);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("DB SELECT ERROR: " + ex);
+            }
+            finally
+            {
+                connect.Close();
+            }
+
+            return dt;
+        }
+
+        //Select Search by name and size
+        public DataTable SearchByNameSize(string search, string size)
+        {
+            SqlConnection connect = new SqlConnection(connString);
+            DataTable dt = new DataTable();
+
+            try
+            {
+                string sql = "SELECT itemName FROM items WHERE itemSize=@size AND itemName LIKE '%' + @search + '%'";
+                SqlCommand cmd = new SqlCommand(sql, connect);
+
+                cmd.Parameters.AddWithValue("@size", size);
+                cmd.Parameters.AddWithValue("@search", search);
+
+                SqlDataAdapter ad = new SqlDataAdapter(cmd);
+
+                connect.Open();
+                ad.Fill(dt);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("DB SELECT ERROR: " + ex);
+            }
+            finally
+            {
+                connect.Close();
+            }
+
+            return dt;
+        }
+
+        //Select Search by name and category
+        public DataTable SearchByNameCat(string search, string category)
+        {
+            SqlConnection connect = new SqlConnection(connString);
+            DataTable dt = new DataTable();
+
+            try
+            {
+                string sql = "SELECT itemName FROM items WHERE itemCategory=@category AND itemName LIKE '%' + @search + '%'";
+                SqlCommand cmd = new SqlCommand(sql, connect);
+
+                cmd.Parameters.AddWithValue("@category", category);
+                cmd.Parameters.AddWithValue("@search", search);
+
+                SqlDataAdapter ad = new SqlDataAdapter(cmd);
+
+                connect.Open();
+                ad.Fill(dt);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("DB SELECT ERROR: " + ex);
+            }
+            finally
+            {
+                connect.Close();
+            }
+
+            return dt;
+        }
+
+        //Select Search by name, size, and category
+        public DataTable SearchByNameSizeCat(string search, string size, string catagory)
+        {
+            SqlConnection connect = new SqlConnection(connString);
+            DataTable dt = new DataTable();
+
+            try
+            {
+                string sql = "SELECT itemName FROM items WHERE itemSize=@size AND itemCategory=@category AND itemName LIKE '%' + @search + '%'";
+                SqlCommand cmd = new SqlCommand(sql, connect);
+
+                cmd.Parameters.AddWithValue("@size", size);
+                cmd.Parameters.AddWithValue("@category", catagory);
+                cmd.Parameters.AddWithValue("@search", search);
+
+                SqlDataAdapter ad = new SqlDataAdapter(cmd);
+
+                connect.Open();
+                ad.Fill(dt);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("DB SELECT ERROR: " + ex);
+            }
+            finally
+            {
+                connect.Close();
+            }
+
+            return dt;
+        }
+
         //Select by Name
         public DataTable SelectByName(string name)
         {
@@ -156,6 +308,42 @@ namespace EStorage.Classes
             return success;
         }
 
+        public bool InsertNameCountSize(itemClass i)
+        {
+            bool success = false;
+
+            SqlConnection connect = new SqlConnection(connString);
+
+            try
+            {
+                string sql = "INSERT INTO items (itemName, itemCount, itemSize) VALUES (@itemName, @itemCount, @itemSize)";
+                SqlCommand cmd = new SqlCommand(sql, connect);
+
+                cmd.Parameters.AddWithValue("@itemName", i.itemName);
+                cmd.Parameters.AddWithValue("@itemCount", i.itemCount);
+                cmd.Parameters.AddWithValue("@itemSize", i.itemSize);
+
+                connect.Open();
+                int rows = cmd.ExecuteNonQuery();
+
+                if (rows > 0)
+                {
+                    success = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("DB INSERT ERROR: " + ex);
+            }
+            finally
+            {
+                connect.Close();
+            }
+
+
+            return success;
+        }
+
         //Update Data
         public bool Update(itemClass i)
         {
@@ -194,6 +382,7 @@ namespace EStorage.Classes
             return success;
         }
 
+        //Delete Data
         public bool Delete(itemClass i)
         {
             bool success = false;
