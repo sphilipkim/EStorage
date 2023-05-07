@@ -36,10 +36,13 @@
             label_com = new Label();
             bindingSource1 = new BindingSource(components);
             groupBox_item = new GroupBox();
+            button_remove_item = new Button();
+            groupBox_add_sub = new GroupBox();
+            textBox_add_sub = new TextBox();
+            button_item_add = new Button();
+            button_item_remove = new Button();
             button_item_admin = new Button();
             button_item_update = new Button();
-            button_item_remove = new Button();
-            button_item_add = new Button();
             comboBox_item_category = new ComboBox();
             comboBox_item_size = new ComboBox();
             label_item_category = new Label();
@@ -48,7 +51,7 @@
             textBox_item_count = new TextBox();
             label_item_name = new Label();
             textBox_item_name = new TextBox();
-            listBox = new ListBox();
+            listBox_search = new ListBox();
             groupBox_search = new GroupBox();
             comboBox_search_category = new ComboBox();
             comboBox_search_size = new ComboBox();
@@ -57,10 +60,13 @@
             label_search_name = new Label();
             textBox_search_name = new TextBox();
             groupBox_history = new GroupBox();
+            listBox_history = new ListBox();
             groupBox_scanner.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)bindingSource1).BeginInit();
             groupBox_item.SuspendLayout();
+            groupBox_add_sub.SuspendLayout();
             groupBox_search.SuspendLayout();
+            groupBox_history.SuspendLayout();
             SuspendLayout();
             // 
             // comboBox_com
@@ -84,7 +90,6 @@
             groupBox_scanner.TabIndex = 2;
             groupBox_scanner.TabStop = false;
             groupBox_scanner.Text = "Scanner";
-            groupBox_scanner.Enter += groupBox1_Enter;
             // 
             // label_scanner_status
             // 
@@ -94,7 +99,6 @@
             label_scanner_status.Size = new Size(48, 15);
             label_scanner_status.TabIndex = 3;
             label_scanner_status.Text = "No Port";
-            label_scanner_status.Click += label1_Click;
             // 
             // progressBar_com
             // 
@@ -114,10 +118,10 @@
             // 
             // groupBox_item
             // 
+            groupBox_item.Controls.Add(button_remove_item);
+            groupBox_item.Controls.Add(groupBox_add_sub);
             groupBox_item.Controls.Add(button_item_admin);
             groupBox_item.Controls.Add(button_item_update);
-            groupBox_item.Controls.Add(button_item_remove);
-            groupBox_item.Controls.Add(button_item_add);
             groupBox_item.Controls.Add(comboBox_item_category);
             groupBox_item.Controls.Add(comboBox_item_size);
             groupBox_item.Controls.Add(label_item_category);
@@ -133,17 +137,72 @@
             groupBox_item.TabStop = false;
             groupBox_item.Text = "Item";
             // 
+            // button_remove_item
+            // 
+            button_remove_item.Enabled = false;
+            button_remove_item.Location = new Point(228, 158);
+            button_remove_item.Name = "button_remove_item";
+            button_remove_item.Size = new Size(60, 54);
+            button_remove_item.TabIndex = 19;
+            button_remove_item.Text = "Remove Item";
+            button_remove_item.UseVisualStyleBackColor = true;
+            button_remove_item.Click += button_remove_item_Click;
+            // 
+            // groupBox_add_sub
+            // 
+            groupBox_add_sub.Controls.Add(textBox_add_sub);
+            groupBox_add_sub.Controls.Add(button_item_add);
+            groupBox_add_sub.Controls.Add(button_item_remove);
+            groupBox_add_sub.Location = new Point(19, 154);
+            groupBox_add_sub.Name = "groupBox_add_sub";
+            groupBox_add_sub.Size = new Size(203, 58);
+            groupBox_add_sub.TabIndex = 18;
+            groupBox_add_sub.TabStop = false;
+            groupBox_add_sub.Text = "Add/Subtract";
+            // 
+            // textBox_add_sub
+            // 
+            textBox_add_sub.Enabled = false;
+            textBox_add_sub.Location = new Point(6, 24);
+            textBox_add_sub.Name = "textBox_add_sub";
+            textBox_add_sub.Size = new Size(100, 23);
+            textBox_add_sub.TabIndex = 17;
+            // 
+            // button_item_add
+            // 
+            button_item_add.Enabled = false;
+            button_item_add.Location = new Point(112, 24);
+            button_item_add.Name = "button_item_add";
+            button_item_add.Size = new Size(39, 23);
+            button_item_add.TabIndex = 12;
+            button_item_add.Text = "+";
+            button_item_add.UseVisualStyleBackColor = true;
+            button_item_add.Click += button_item_add_Click;
+            // 
+            // button_item_remove
+            // 
+            button_item_remove.Enabled = false;
+            button_item_remove.Location = new Point(157, 24);
+            button_item_remove.Name = "button_item_remove";
+            button_item_remove.Size = new Size(39, 23);
+            button_item_remove.TabIndex = 13;
+            button_item_remove.Text = "-";
+            button_item_remove.UseVisualStyleBackColor = true;
+            button_item_remove.Click += button_item_remove_Click;
+            // 
             // button_item_admin
             // 
-            button_item_admin.Location = new Point(283, 165);
+            button_item_admin.Location = new Point(294, 158);
             button_item_admin.Name = "button_item_admin";
-            button_item_admin.Size = new Size(65, 43);
+            button_item_admin.Size = new Size(54, 54);
             button_item_admin.TabIndex = 16;
             button_item_admin.Text = "Admin Mode";
             button_item_admin.UseVisualStyleBackColor = true;
+            button_item_admin.Click += button_item_admin_Click;
             // 
             // button_item_update
             // 
+            button_item_update.Enabled = false;
             button_item_update.Location = new Point(273, 92);
             button_item_update.Name = "button_item_update";
             button_item_update.Size = new Size(75, 51);
@@ -152,28 +211,9 @@
             button_item_update.UseVisualStyleBackColor = true;
             button_item_update.Click += button_item_update_Click;
             // 
-            // button_item_remove
-            // 
-            button_item_remove.Location = new Point(91, 165);
-            button_item_remove.Name = "button_item_remove";
-            button_item_remove.Size = new Size(65, 43);
-            button_item_remove.TabIndex = 13;
-            button_item_remove.Text = "Remove Amount";
-            button_item_remove.UseVisualStyleBackColor = true;
-            button_item_remove.Click += button_item_remove_Click;
-            // 
-            // button_item_add
-            // 
-            button_item_add.Location = new Point(19, 165);
-            button_item_add.Name = "button_item_add";
-            button_item_add.Size = new Size(66, 43);
-            button_item_add.TabIndex = 12;
-            button_item_add.Text = "Add Amount";
-            button_item_add.UseVisualStyleBackColor = true;
-            button_item_add.Click += button_item_add_Click;
-            // 
             // comboBox_item_category
             // 
+            comboBox_item_category.Enabled = false;
             comboBox_item_category.FormattingEnabled = true;
             comboBox_item_category.Items.AddRange(new object[] { "Christmas", "Halloween", "Thanksgiving", "Easter", "Valentines", "New Years" });
             comboBox_item_category.Location = new Point(87, 121);
@@ -183,6 +223,7 @@
             // 
             // comboBox_item_size
             // 
+            comboBox_item_size.Enabled = false;
             comboBox_item_size.FormattingEnabled = true;
             comboBox_item_size.Items.AddRange(new object[] { "Large", "Medium", "Small", "Large Tumbler", "Medium Tumbler", "Small Tumbler" });
             comboBox_item_size.Location = new Point(87, 92);
@@ -244,15 +285,15 @@
             textBox_item_name.Size = new Size(261, 23);
             textBox_item_name.TabIndex = 0;
             // 
-            // listBox
+            // listBox_search
             // 
-            listBox.FormattingEnabled = true;
-            listBox.ItemHeight = 15;
-            listBox.Location = new Point(6, 22);
-            listBox.Name = "listBox";
-            listBox.Size = new Size(389, 214);
-            listBox.TabIndex = 4;
-            listBox.DoubleClick += listBox_DoubleClick;
+            listBox_search.FormattingEnabled = true;
+            listBox_search.ItemHeight = 15;
+            listBox_search.Location = new Point(6, 22);
+            listBox_search.Name = "listBox_search";
+            listBox_search.Size = new Size(389, 214);
+            listBox_search.TabIndex = 4;
+            listBox_search.DoubleClick += listBox_DoubleClick;
             // 
             // groupBox_search
             // 
@@ -262,7 +303,7 @@
             groupBox_search.Controls.Add(label_search_size);
             groupBox_search.Controls.Add(label_search_name);
             groupBox_search.Controls.Add(textBox_search_name);
-            groupBox_search.Controls.Add(listBox);
+            groupBox_search.Controls.Add(listBox_search);
             groupBox_search.Location = new Point(387, 12);
             groupBox_search.Name = "groupBox_search";
             groupBox_search.Size = new Size(401, 330);
@@ -327,12 +368,22 @@
             // 
             // groupBox_history
             // 
+            groupBox_history.Controls.Add(listBox_history);
             groupBox_history.Location = new Point(12, 242);
             groupBox_history.Name = "groupBox_history";
             groupBox_history.Size = new Size(369, 204);
             groupBox_history.TabIndex = 6;
             groupBox_history.TabStop = false;
-            groupBox_history.Text = "groupBox1";
+            groupBox_history.Text = "History";
+            // 
+            // listBox_history
+            // 
+            listBox_history.FormattingEnabled = true;
+            listBox_history.ItemHeight = 15;
+            listBox_history.Location = new Point(6, 22);
+            listBox_history.Name = "listBox_history";
+            listBox_history.Size = new Size(357, 169);
+            listBox_history.TabIndex = 0;
             // 
             // title
             // 
@@ -352,8 +403,11 @@
             ((System.ComponentModel.ISupportInitialize)bindingSource1).EndInit();
             groupBox_item.ResumeLayout(false);
             groupBox_item.PerformLayout();
+            groupBox_add_sub.ResumeLayout(false);
+            groupBox_add_sub.PerformLayout();
             groupBox_search.ResumeLayout(false);
             groupBox_search.PerformLayout();
+            groupBox_history.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -378,7 +432,7 @@
         private Button button_item_add;
         private Button button_item_update;
         private Button button_item_admin;
-        private ListBox listBox;
+        private ListBox listBox_search;
         private GroupBox groupBox_search;
         private ComboBox comboBox_search_category;
         private ComboBox comboBox_search_size;
@@ -387,5 +441,9 @@
         private Label label_search_name;
         private TextBox textBox_search_name;
         private GroupBox groupBox_history;
+        private ListBox listBox_history;
+        private TextBox textBox_add_sub;
+        private GroupBox groupBox_add_sub;
+        private Button button_remove_item;
     }
 }
