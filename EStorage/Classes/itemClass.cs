@@ -12,19 +12,17 @@ namespace EStorage.Classes
 {
     internal class itemClass
     {
+        //Variables
         public int itemID { get; set; }
-
         public string itemName { get; set; }
-
         public int itemCount { get; set; }
-
         public string itemSize { get; set; }
-
         public string itemCategory { get; set; }
 
+        //SQL connection
         static string connString = ConfigurationManager.ConnectionStrings["connString"].ConnectionString;
 
-        //Selecting Data
+        //Select all items
         public DataTable Select()
         {
             SqlConnection connect = new SqlConnection(connString);
@@ -52,7 +50,7 @@ namespace EStorage.Classes
             return dt;
         }
 
-        //Select, show only names
+        //Select all items, show only names (search list initialization)
         public DataTable SelectNames()
         {
             SqlConnection connect = new SqlConnection(connString);
@@ -60,7 +58,7 @@ namespace EStorage.Classes
 
             try
             {
-                string sql = "SELECT itemName FROM items";
+                string sql = "SELECT itemName FROM items ORDER BY itemName ASC";
                 SqlCommand cmd = new SqlCommand(sql, connect);
 
                 SqlDataAdapter ad = new SqlDataAdapter(cmd);
@@ -80,7 +78,7 @@ namespace EStorage.Classes
             return dt;
         }
 
-        //Select Search by name
+        //Search by name
         public DataTable SearchByName(string search)
         {
             SqlConnection connect = new SqlConnection(connString);
@@ -88,7 +86,7 @@ namespace EStorage.Classes
 
             try
             {
-                string sql = "SELECT itemName FROM items WHERE itemName LIKE '%' + @search + '%'";
+                string sql = "SELECT itemName FROM items WHERE itemName LIKE '%' + @search + '%' ORDER BY itemName ASC";
                 SqlCommand cmd = new SqlCommand(sql, connect);
 
                 cmd.Parameters.AddWithValue("@search", search);
@@ -110,7 +108,7 @@ namespace EStorage.Classes
             return dt;
         }
 
-        //Select Search by name and size
+        //Search by name and size
         public DataTable SearchByNameSize(string search, string size)
         {
             SqlConnection connect = new SqlConnection(connString);
@@ -118,7 +116,7 @@ namespace EStorage.Classes
 
             try
             {
-                string sql = "SELECT itemName FROM items WHERE itemSize=@size AND itemName LIKE '%' + @search + '%'";
+                string sql = "SELECT itemName FROM items WHERE itemSize=@size AND itemName LIKE '%' + @search + '%' ORDER BY itemName ASC";
                 SqlCommand cmd = new SqlCommand(sql, connect);
 
                 cmd.Parameters.AddWithValue("@size", size);
@@ -141,7 +139,7 @@ namespace EStorage.Classes
             return dt;
         }
 
-        //Select Search by name and category
+        //Search by name and category
         public DataTable SearchByNameCat(string search, string category)
         {
             SqlConnection connect = new SqlConnection(connString);
@@ -149,7 +147,7 @@ namespace EStorage.Classes
 
             try
             {
-                string sql = "SELECT itemName FROM items WHERE itemCategory=@category AND itemName LIKE '%' + @search + '%'";
+                string sql = "SELECT itemName FROM items WHERE itemCategory=@category AND itemName LIKE '%' + @search + '%' ORDER BY itemName ASC";
                 SqlCommand cmd = new SqlCommand(sql, connect);
 
                 cmd.Parameters.AddWithValue("@category", category);
@@ -172,7 +170,7 @@ namespace EStorage.Classes
             return dt;
         }
 
-        //Select Search by name, size, and category
+        //Search by name, size, and category
         public DataTable SearchByNameSizeCat(string search, string size, string catagory)
         {
             SqlConnection connect = new SqlConnection(connString);
@@ -180,7 +178,7 @@ namespace EStorage.Classes
 
             try
             {
-                string sql = "SELECT itemName FROM items WHERE itemSize=@size AND itemCategory=@category AND itemName LIKE '%' + @search + '%'";
+                string sql = "SELECT itemName FROM items WHERE itemSize=@size AND itemCategory=@category AND itemName LIKE '%' + @search + '%' ORDER BY itemName ASC";
                 SqlCommand cmd = new SqlCommand(sql, connect);
 
                 cmd.Parameters.AddWithValue("@size", size);
@@ -204,7 +202,7 @@ namespace EStorage.Classes
             return dt;
         }
 
-        //Select by Name
+        //Select by Name (Scan + Search double click)
         public DataTable SelectByName(string name)
         {
             SqlConnection connect = new SqlConnection(connString);
@@ -234,7 +232,7 @@ namespace EStorage.Classes
             return dt;
         }
 
-        //Inserting Data
+        //Inserting item (Add new item)
         public bool Insert(itemClass i)
         {
             bool success = false;
@@ -272,7 +270,7 @@ namespace EStorage.Classes
             return success;
         }
 
-        //Insert name and count
+        //Insert name and count (New item on Scan)
         public bool InsertNameCount(itemClass i)
         {
             bool success = false;
@@ -308,6 +306,7 @@ namespace EStorage.Classes
             return success;
         }
 
+        //Insert name, count, and size (New item on Scan)
         public bool InsertNameCountSize(itemClass i)
         {
             bool success = false;
@@ -344,7 +343,7 @@ namespace EStorage.Classes
             return success;
         }
 
-        //Update Data
+        //Update item
         public bool Update(itemClass i)
         {
             bool success = false;
@@ -382,7 +381,7 @@ namespace EStorage.Classes
             return success;
         }
 
-        //Delete Data
+        //Delete item
         public bool Delete(itemClass i)
         {
             bool success = false;
@@ -391,10 +390,10 @@ namespace EStorage.Classes
 
             try
             {
-                string sql = "DELETE FROM items WHERE itemID=@itemID";
+                string sql = "DELETE FROM items WHERE itemName=@itemName";
                 SqlCommand cmd = new SqlCommand(sql, connect);
 
-                cmd.Parameters.AddWithValue("@itemID", i.itemID);
+                cmd.Parameters.AddWithValue("@itemName", i.itemName);
 
                 connect.Open();
                 int rows = cmd.ExecuteNonQuery();

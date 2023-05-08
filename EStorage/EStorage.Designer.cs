@@ -36,6 +36,7 @@
             label_com = new Label();
             bindingSource1 = new BindingSource(components);
             groupBox_item = new GroupBox();
+            button_add_item = new Button();
             button_remove_item = new Button();
             groupBox_add_sub = new GroupBox();
             textBox_add_sub = new TextBox();
@@ -118,6 +119,7 @@
             // 
             // groupBox_item
             // 
+            groupBox_item.Controls.Add(button_add_item);
             groupBox_item.Controls.Add(button_remove_item);
             groupBox_item.Controls.Add(groupBox_add_sub);
             groupBox_item.Controls.Add(button_item_admin);
@@ -137,14 +139,25 @@
             groupBox_item.TabStop = false;
             groupBox_item.Text = "Item";
             // 
+            // button_add_item
+            // 
+            button_add_item.Enabled = false;
+            button_add_item.Location = new Point(228, 158);
+            button_add_item.Name = "button_add_item";
+            button_add_item.Size = new Size(60, 25);
+            button_add_item.TabIndex = 20;
+            button_add_item.Text = "Add";
+            button_add_item.UseVisualStyleBackColor = true;
+            button_add_item.Click += button_add_item_Click;
+            // 
             // button_remove_item
             // 
             button_remove_item.Enabled = false;
-            button_remove_item.Location = new Point(228, 158);
+            button_remove_item.Location = new Point(228, 187);
             button_remove_item.Name = "button_remove_item";
-            button_remove_item.Size = new Size(60, 54);
+            button_remove_item.Size = new Size(60, 25);
             button_remove_item.TabIndex = 19;
-            button_remove_item.Text = "Remove Item";
+            button_remove_item.Text = "Remove";
             button_remove_item.UseVisualStyleBackColor = true;
             button_remove_item.Click += button_remove_item_Click;
             // 
@@ -215,7 +228,7 @@
             // 
             comboBox_item_category.Enabled = false;
             comboBox_item_category.FormattingEnabled = true;
-            comboBox_item_category.Items.AddRange(new object[] { "Christmas", "Halloween", "Thanksgiving", "Easter", "Valentines", "New Years" });
+            comboBox_item_category.Items.AddRange(new object[] { "", "Christmas", "Halloween", "Thanksgiving", "Easter", "Valentines", "New Years" });
             comboBox_item_category.Location = new Point(87, 121);
             comboBox_item_category.Name = "comboBox_item_category";
             comboBox_item_category.Size = new Size(180, 23);
@@ -260,7 +273,6 @@
             // 
             // textBox_item_count
             // 
-            textBox_item_count.Enabled = false;
             textBox_item_count.Location = new Point(87, 63);
             textBox_item_count.Name = "textBox_item_count";
             textBox_item_count.ReadOnly = true;
@@ -278,7 +290,6 @@
             // 
             // textBox_item_name
             // 
-            textBox_item_name.Enabled = false;
             textBox_item_name.Location = new Point(87, 34);
             textBox_item_name.Name = "textBox_item_name";
             textBox_item_name.ReadOnly = true;
@@ -445,5 +456,6 @@
         private TextBox textBox_add_sub;
         private GroupBox groupBox_add_sub;
         private Button button_remove_item;
+        private Button button_add_item;
     }
 }
