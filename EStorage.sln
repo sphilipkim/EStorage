@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EStorage", "EStorage\EStorage.csproj", "{57909019-F9B0-4067-B050-AC98C54EA002}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EStorage_old", "EStorage\EStorage_old.csproj", "{57909019-F9B0-4067-B050-AC98C54EA002}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{A5FED9ED-9A2F-4B30-A4FF-41793D53CBC0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EStorage", "EStorage2\EStorage.csproj", "{CCBC9148-BC17-4D6E-A012-0DE5738C9908}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,12 @@ Global
 		{57909019-F9B0-4067-B050-AC98C54EA002}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57909019-F9B0-4067-B050-AC98C54EA002}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57909019-F9B0-4067-B050-AC98C54EA002}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5FED9ED-9A2F-4B30-A4FF-41793D53CBC0}.Debug|Any CPU.ActiveCfg = Debug
+		{A5FED9ED-9A2F-4B30-A4FF-41793D53CBC0}.Release|Any CPU.ActiveCfg = Release
+		{CCBC9148-BC17-4D6E-A012-0DE5738C9908}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCBC9148-BC17-4D6E-A012-0DE5738C9908}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCBC9148-BC17-4D6E-A012-0DE5738C9908}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCBC9148-BC17-4D6E-A012-0DE5738C9908}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

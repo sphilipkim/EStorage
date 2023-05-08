@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,6 +11,7 @@ using System.Diagnostics;
 using EStorage.Classes;
 using static System.Net.Mime.MediaTypeNames;
 using System.Windows.Forms.VisualStyles;
+using System.IO;
 
 namespace EStorage
 {
@@ -486,15 +487,31 @@ namespace EStorage
             //Try Catch
             try
             {
-                //Create file if it doesn't exist
-                if (!File.Exists("C:\\Users\\Philip\\Desktop\\Storage Proj\\EStorage\\EStorage\\Logs\\" + today + ".txt"))
+                //AppdataPath
+                string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "E-Storage");
+                //Create E-Storage folder if it doesn't exist
+                if (!Directory.Exists(path))
                 {
-                    MessageBox.Show("File Created");
-                    File.Create("C:\\Users\\Philip\\Desktop\\Storage Proj\\EStorage\\EStorage\\Logs\\" + today + ".txt");
+                    Directory.CreateDirectory(path);
+                }
+
+                //Create Logs folder if it doesn't exist
+                if (!Directory.Exists("%AppData%\\Roaming\\E-Storage\\Logs"))
+                {
+                    Directory.CreateDirectory("%AppData%\\Roaming\\E-Storage\\Logs");
+                }
+
+                
+
+                //Create file if it doesn't exist
+                if (!File.Exists(".\\Logs\\" + today + ".txt"))
+                {
+                    //MessageBox.Show("File Created");
+                    File.Create(".\\Logs\\" + today + ".txt").Dispose();
                 }
 
                 //Concatenate to the Log file
-                using (StreamWriter sw = File.AppendText("C:\\Users\\Philip\\Desktop\\Storage Proj\\EStorage\\EStorage\\Logs\\" + today + ".txt"))
+                using (StreamWriter sw = File.AppendText(".\\Logs\\" + today + ".txt"))
                 {
                     sw.WriteLine(hist);
                 }
@@ -506,6 +523,8 @@ namespace EStorage
                 Debug.WriteLine("FILE CREATE ERROR: " + ex);
                 addToHistory("Log File Create/Write Error: " + ex.Message);
             }
+
+            
 
             //If UI requires Invoke
             if (listBox_history.InvokeRequired)
@@ -665,5 +684,6 @@ namespace EStorage
                 addToHistory("Closing Error: " + ex.Message);
             }
         }
+
     }
 }
