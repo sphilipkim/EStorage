@@ -283,6 +283,7 @@ namespace EStorage
                 if (i.Update(i))
                 {
                     addToHistory("Updated Item: " + i.itemName + " - Size: " + (!(prevSize.Equals(i.itemSize)) ? prevSize + " --> " + i.itemSize : i.itemSize) + ", Category: " + (!(prevCat.Equals(i.itemCategory)) ? prevCat + " --> " + i.itemCategory : i.itemCategory));
+                    clearFields();
                 }
                 else
                 {
@@ -577,6 +578,7 @@ namespace EStorage
                 addToHistory("Removed item: " + i.itemName);
                 //Update search screen to reflect
                 updateSearch();
+                clearFields();
             }
             else
             {
@@ -608,6 +610,7 @@ namespace EStorage
                 addToHistory("Added new item: " + i.itemName + ", Amount: " + i.itemCount + ", Size: " + i.itemSize + ", Category" + i.itemCategory);
                 //Update search screen to reflect
                 updateSearch();
+                clearFields();
             }
             else
             {
@@ -666,6 +669,15 @@ namespace EStorage
                 Debug.WriteLine("EXIT ERROR: " + ex);
                 addToHistory("Closing Error: " + ex.Message);
             }
+        }
+
+        //Clears item field
+        private void clearFields()
+        {
+            textBox_item_name.Clear();
+            textBox_item_count.Clear();
+            comboBox_item_size.Text = string.Empty;
+            comboBox_item_category.Text = string.Empty;
         }
     }
 }
