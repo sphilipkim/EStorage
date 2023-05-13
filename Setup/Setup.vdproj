@@ -39,6 +39,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_859FC5AF2AAC41CD8042E7BA5554C05D"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_978F5270B1764CC5D21428EE36AED336"
         "OwnerKey" = "8:_FBB99ED402EA4B2BBDA4CE5787F16CB9"
         "MsmSig" = "8:_UNDEFINED"
@@ -75,6 +81,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_DB46564055954E74B4222366FE70FB4C"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_EA4BF9D987587261120BC1EFD0021647"
         "OwnerKey" = "8:_FBB99ED402EA4B2BBDA4CE5787F16CB9"
         "MsmSig" = "8:_UNDEFINED"
@@ -83,12 +95,6 @@
         {
         "MsmKey" = "8:_FBB99ED402EA4B2BBDA4CE5787F16CB9"
         "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_A51232827AAFD6FE5A5FC4920B3A383A"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -125,6 +131,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_05442E86F6194513781903D7D1CA521A"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_A51232827AAFD6FE5A5FC4920B3A383A"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -294,6 +306,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_859FC5AF2AAC41CD8042E7BA5554C05D"
+            {
+            "SourcePath" = "8:..\\EStorage\\bin\\Release\\x86\\SQLite.Interop.dll"
+            "TargetName" = "8:SQLite.Interop.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_86113C4122BA4999BCCD82C3B326431F"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_978F5270B1764CC5D21428EE36AED336"
             {
             "AssemblyRegister" = "3:1"
@@ -407,6 +439,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DB46564055954E74B4222366FE70FB4C"
+            {
+            "SourcePath" = "8:..\\EStorage\\bin\\Release\\x64\\SQLite.Interop.dll"
+            "TargetName" = "8:SQLite.Interop.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_EBF31CDCF12245FAB2551B6F83786BF3"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_EA4BF9D987587261120BC1EFD0021647"
             {
             "AssemblyRegister" = "3:1"
@@ -476,6 +528,28 @@
             "Property" = "8:TARGETDIR"
                 "Folders"
                 {
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_86113C4122BA4999BCCD82C3B326431F"
+                    {
+                    "Name" = "8:x86"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_49994684787C40339B089AC41542613F"
+                        "Folders"
+                        {
+                        }
+                    }
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_EBF31CDCF12245FAB2551B6F83786BF3"
+                    {
+                    "Name" = "8:x64"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_883C967632664A6BA82A6146065C0A8C"
+                        "Folders"
+                        {
+                        }
+                    }
                 }
             }
             "{1525181F-901A-416C-8A58-119130FE478E}:_A7D1AB72C48E4D4CB3F7F3AF6383A1EF"
@@ -505,19 +579,19 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:E-Storage"
-        "ProductCode" = "8:{D1325085-2EC4-4025-9483-E8AE1C3DFF16}"
-        "PackageCode" = "8:{5B019D2E-331B-4BE3-93BE-84D4AC5D9AF2}"
+        "ProductCode" = "8:{E36EBEFF-168B-461C-B29F-D604620DF9C9}"
+        "PackageCode" = "8:{F213971D-F5DC-4B67-838C-89DBF17B4F6C}"
         "UpgradeCode" = "8:{CD20DDB9-78FE-47AD-86D2-CB59B294E696}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.2"
+        "ProductVersion" = "8:1.0.3"
         "Manufacturer" = "8:Subin Kim"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
-        "Title" = "8:Setup"
+        "Title" = "8:E-Storage Setup"
         "Subject" = "8:"
         "ARPCONTACT" = "8:Subin Kim"
         "Keywords" = "8:"

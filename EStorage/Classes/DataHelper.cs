@@ -39,6 +39,7 @@ public static class DataHelper
         }
     }
 
+    //Creates local DB if it does not exist
     public static void InitializeDB()
     {
         //Create SQLite database if it doesn't exist
