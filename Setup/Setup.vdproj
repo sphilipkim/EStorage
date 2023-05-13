@@ -178,18 +178,6 @@
                     }
                 }
             }
-            "{994432C3-9487-495D-8656-3E829A8DBDDE}:_63A409FAEE2D486A9ABB47A3D64A165C"
-            {
-            "DefaultLocation" = "8:[CommonAppDataFolder]\\E-Storage\\Logs"
-            "Name" = "8:Logs"
-            "AlwaysCreate" = "11:FALSE"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Property" = "8:NEWPROPERTY1"
-                "Folders"
-                {
-                }
-            }
             "{3C67513D-01DD-4637-8A68-80971EB9504F}:_8B8078EDAD054CF59F93369EE8D35F58"
             {
             "DefaultLocation" = "8:[ProgramFilesFolder][Manufacturer]\\[ProductName]"
@@ -228,16 +216,16 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:E-Storage Setup"
-        "ProductCode" = "8:{2C4AA471-47B8-482F-BE7B-7871A23E0A9E}"
-        "PackageCode" = "8:{67531C90-6D7A-4928-B3BB-3E0F82ED274A}"
+        "ProductName" = "8:E-Storage"
+        "ProductCode" = "8:{F4AA84B3-9EBE-4381-884E-309F687FEC23}"
+        "PackageCode" = "8:{C0DBFE3F-E036-4C25-90FA-4C1D92C720BF}"
         "UpgradeCode" = "8:{CD20DDB9-78FE-47AD-86D2-CB59B294E696}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.0"
+        "ProductVersion" = "8:1.0.1"
         "Manufacturer" = "8:Subin Kim"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
