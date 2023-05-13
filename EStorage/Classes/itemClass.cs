@@ -4,9 +4,11 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.SQLite;
 
 namespace EStorage.Classes
 {
@@ -20,20 +22,22 @@ namespace EStorage.Classes
         public string itemCategory { get; set; }
 
         //SQL connection
-        static string connString = ConfigurationManager.ConnectionStrings["connString"].ConnectionString;
+
+        private static string DBpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "E-Storage\\Data\\StorageData.db");
+        private static string connString = "Data Source=" + DBpath + ";Version=3;";
 
         //Select all items
         public DataTable Select()
         {
-            SqlConnection connect = new SqlConnection(connString);
+            SQLiteConnection connect = new SQLiteConnection(connString);
             DataTable dt = new DataTable();
 
             try
             {
                 string sql = "SELECT * FROM items";
-                SqlCommand cmd = new SqlCommand(sql, connect);
+                SQLiteCommand cmd = new SQLiteCommand(sql, connect);
 
-                SqlDataAdapter ad = new SqlDataAdapter(cmd);
+                SQLiteDataAdapter ad = new SQLiteDataAdapter(cmd);
 
                 connect.Open();
                 ad.Fill(dt);
@@ -53,15 +57,15 @@ namespace EStorage.Classes
         //Select all items, show only names (search list initialization)
         public DataTable SelectNames()
         {
-            SqlConnection connect = new SqlConnection(connString);
+            SQLiteConnection connect = new SQLiteConnection(connString);
             DataTable dt = new DataTable();
 
             try
             {
                 string sql = "SELECT itemName FROM items ORDER BY itemName ASC";
-                SqlCommand cmd = new SqlCommand(sql, connect);
+                SQLiteCommand cmd = new SQLiteCommand(sql, connect);
 
-                SqlDataAdapter ad = new SqlDataAdapter(cmd);
+                SQLiteDataAdapter ad = new SQLiteDataAdapter(cmd);
 
                 connect.Open();
                 ad.Fill(dt);
@@ -81,17 +85,17 @@ namespace EStorage.Classes
         //Search by name
         public DataTable SearchByName(string search)
         {
-            SqlConnection connect = new SqlConnection(connString);
+            SQLiteConnection connect = new SQLiteConnection(connString);
             DataTable dt = new DataTable();
 
             try
             {
-                string sql = "SELECT itemName FROM items WHERE itemName LIKE '%' + @search + '%' ORDER BY itemName ASC";
-                SqlCommand cmd = new SqlCommand(sql, connect);
+                string sql = "SELECT itemName FROM items WHERE itemName LIKE @search ORDER BY itemName ASC";
+                SQLiteCommand cmd = new SQLiteCommand(sql, connect);
 
-                cmd.Parameters.AddWithValue("@search", search);
+                cmd.Parameters.AddWithValue("@search", "%" + search + "%");
 
-                SqlDataAdapter ad = new SqlDataAdapter(cmd);
+                SQLiteDataAdapter ad = new SQLiteDataAdapter(cmd);
 
                 connect.Open();
                 ad.Fill(dt);
@@ -111,18 +115,18 @@ namespace EStorage.Classes
         //Search by name and size
         public DataTable SearchByNameSize(string search, string size)
         {
-            SqlConnection connect = new SqlConnection(connString);
+            SQLiteConnection connect = new SQLiteConnection(connString);
             DataTable dt = new DataTable();
 
             try
             {
-                string sql = "SELECT itemName FROM items WHERE itemSize=@size AND itemName LIKE '%' + @search + '%' ORDER BY itemName ASC";
-                SqlCommand cmd = new SqlCommand(sql, connect);
+                string sql = "SELECT itemName FROM items WHERE itemSize=@size AND itemName LIKE @search ORDER BY itemName ASC";
+                SQLiteCommand cmd = new SQLiteCommand(sql, connect);
 
                 cmd.Parameters.AddWithValue("@size", size);
-                cmd.Parameters.AddWithValue("@search", search);
+                cmd.Parameters.AddWithValue("@search", "%" + search + "%");
 
-                SqlDataAdapter ad = new SqlDataAdapter(cmd);
+                SQLiteDataAdapter ad = new SQLiteDataAdapter(cmd);
 
                 connect.Open();
                 ad.Fill(dt);
@@ -142,18 +146,18 @@ namespace EStorage.Classes
         //Search by name and category
         public DataTable SearchByNameCat(string search, string category)
         {
-            SqlConnection connect = new SqlConnection(connString);
+            SQLiteConnection connect = new SQLiteConnection(connString);
             DataTable dt = new DataTable();
 
             try
             {
-                string sql = "SELECT itemName FROM items WHERE itemCategory=@category AND itemName LIKE '%' + @search + '%' ORDER BY itemName ASC";
-                SqlCommand cmd = new SqlCommand(sql, connect);
+                string sql = "SELECT itemName FROM items WHERE itemCategory=@category AND itemName LIKE @search ORDER BY itemName ASC";
+                SQLiteCommand cmd = new SQLiteCommand(sql, connect);
 
                 cmd.Parameters.AddWithValue("@category", category);
-                cmd.Parameters.AddWithValue("@search", search);
+                cmd.Parameters.AddWithValue("@search", "%" + search + "%");
 
-                SqlDataAdapter ad = new SqlDataAdapter(cmd);
+                SQLiteDataAdapter ad = new SQLiteDataAdapter(cmd);
 
                 connect.Open();
                 ad.Fill(dt);
@@ -173,19 +177,19 @@ namespace EStorage.Classes
         //Search by name, size, and category
         public DataTable SearchByNameSizeCat(string search, string size, string catagory)
         {
-            SqlConnection connect = new SqlConnection(connString);
+            SQLiteConnection connect = new SQLiteConnection(connString);
             DataTable dt = new DataTable();
 
             try
             {
-                string sql = "SELECT itemName FROM items WHERE itemSize=@size AND itemCategory=@category AND itemName LIKE '%' + @search + '%' ORDER BY itemName ASC";
-                SqlCommand cmd = new SqlCommand(sql, connect);
+                string sql = "SELECT itemName FROM items WHERE itemSize=@size AND itemCategory=@category AND itemName LIKE @search ORDER BY itemName ASC";
+                SQLiteCommand cmd = new SQLiteCommand(sql, connect);
 
                 cmd.Parameters.AddWithValue("@size", size);
                 cmd.Parameters.AddWithValue("@category", catagory);
-                cmd.Parameters.AddWithValue("@search", search);
+                cmd.Parameters.AddWithValue("@search", "%" + search + "%");
 
-                SqlDataAdapter ad = new SqlDataAdapter(cmd);
+                SQLiteDataAdapter ad = new SQLiteDataAdapter(cmd);
 
                 connect.Open();
                 ad.Fill(dt);
@@ -205,17 +209,17 @@ namespace EStorage.Classes
         //Select by Name (Scan + Search double click)
         public DataTable SelectByName(string name)
         {
-            SqlConnection connect = new SqlConnection(connString);
+            SQLiteConnection connect = new SQLiteConnection(connString);
             DataTable dt = new DataTable();
 
             try
             {
                 string sql = "SELECT * FROM items WHERE itemName=@itemName";
-                SqlCommand cmd = new SqlCommand(sql, connect);
+                SQLiteCommand cmd = new SQLiteCommand(sql, connect);
 
                 cmd.Parameters.AddWithValue("@itemName", name);
 
-                SqlDataAdapter ad = new SqlDataAdapter(cmd);
+                SQLiteDataAdapter ad = new SQLiteDataAdapter(cmd);
 
                 connect.Open();
                 ad.Fill(dt);
@@ -237,12 +241,12 @@ namespace EStorage.Classes
         {
             bool success = false;
 
-            SqlConnection connect = new SqlConnection(connString);
+            SQLiteConnection connect = new SQLiteConnection(connString);
 
             try
             {
                 string sql = "INSERT INTO items (itemName, itemCount, itemSize, itemCategory) VALUES (@itemName, @itemCount, @itemSize, @itemCategory)";
-                SqlCommand cmd = new SqlCommand(sql, connect);
+                SQLiteCommand cmd = new SQLiteCommand(sql, connect);
 
                 cmd.Parameters.AddWithValue("@itemName", i.itemName);
                 cmd.Parameters.AddWithValue("@itemCount", i.itemCount);
@@ -275,12 +279,12 @@ namespace EStorage.Classes
         {
             bool success = false;
 
-            SqlConnection connect = new SqlConnection(connString);
+            SQLiteConnection connect = new SQLiteConnection(connString);
 
             try
             {
                 string sql = "INSERT INTO items (itemName, itemCount) VALUES (@itemName, @itemCount)";
-                SqlCommand cmd = new SqlCommand(sql, connect);
+                SQLiteCommand cmd = new SQLiteCommand(sql, connect);
 
                 cmd.Parameters.AddWithValue("@itemName", i.itemName);
                 cmd.Parameters.AddWithValue("@itemCount", i.itemCount);
@@ -311,12 +315,12 @@ namespace EStorage.Classes
         {
             bool success = false;
 
-            SqlConnection connect = new SqlConnection(connString);
+            SQLiteConnection connect = new SQLiteConnection(connString);
 
             try
             {
                 string sql = "INSERT INTO items (itemName, itemCount, itemSize) VALUES (@itemName, @itemCount, @itemSize)";
-                SqlCommand cmd = new SqlCommand(sql, connect);
+                SQLiteCommand cmd = new SQLiteCommand(sql, connect);
 
                 cmd.Parameters.AddWithValue("@itemName", i.itemName);
                 cmd.Parameters.AddWithValue("@itemCount", i.itemCount);
@@ -348,12 +352,12 @@ namespace EStorage.Classes
         {
             bool success = false;
 
-            SqlConnection connect = new SqlConnection(connString);
+            SQLiteConnection connect = new SQLiteConnection(connString);
 
             try
             {
                 string sql = "UPDATE items SET itemName=@itemName, itemCount=@itemCount, itemSize=@itemSize, itemCategory=@itemCategory WHERE itemID=@itemID";
-                SqlCommand cmd = new SqlCommand(sql, connect);
+                SQLiteCommand cmd = new SQLiteCommand(sql, connect);
 
                 cmd.Parameters.AddWithValue("@itemID", i.itemID);
                 cmd.Parameters.AddWithValue("@itemName", i.itemName);
@@ -386,12 +390,12 @@ namespace EStorage.Classes
         {
             bool success = false;
 
-            SqlConnection connect = new SqlConnection(connString);
+            SQLiteConnection connect = new SQLiteConnection(connString);
 
             try
             {
                 string sql = "DELETE FROM items WHERE itemName=@itemName";
-                SqlCommand cmd = new SqlCommand(sql, connect);
+                SQLiteCommand cmd = new SQLiteCommand(sql, connect);
 
                 cmd.Parameters.AddWithValue("@itemName", i.itemName);
 

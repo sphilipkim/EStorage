@@ -17,6 +17,10 @@ namespace EStorage2
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            DataHelper.InitializeLogs();
+            DataHelper.InitializeDB();
+
             Application.Run(new title());
         }
     }

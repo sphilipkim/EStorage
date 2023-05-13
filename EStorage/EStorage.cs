@@ -233,10 +233,10 @@ namespace EStorage
                     }
 
                     //If UI needs Invoke
-                    if (textBox_item_name.InvokeRequired)
+                    if (listBox_search.InvokeRequired)
                     {
                         Action safeSearch = delegate { InitializeSearchList(); };
-                        textBox_item_name.Invoke(safeSearch);
+                        listBox_search.Invoke(safeSearch);
                     }
                     else
                     {
@@ -395,6 +395,7 @@ namespace EStorage
                 {
                     //Query
                     dt = i.SearchByName(searchName);
+                    Debug.WriteLine(dt.ToString());
                 }
                 catch (Exception ex)
                 {
@@ -458,6 +459,7 @@ namespace EStorage
             for (int i = 0; i < st.Length; i++)
             {
                 st[i] = dt.Rows[i][0].ToString();
+                Debug.WriteLine(st[i]);
             }
 
             //If UI requires Invoke
@@ -478,7 +480,7 @@ namespace EStorage
         {
             //Current time
             string hist = DateTime.Now.ToString("H:mm:ss");
-            //Current date for file creation
+            //Current date for logging
             string today = DateTime.Now.ToString("M-dd-yyyy");
 
             //Concat time and log text
@@ -487,34 +489,9 @@ namespace EStorage
             //Try Catch
             try
             {
-
-                
                 //AppdataPath
                 string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "E-Storage");
                 Debug.WriteLine(path);
-                
-                //Create E-Storage folder if it doesn't exist
-                if (!Directory.Exists(path))
-                {
-                    Directory.CreateDirectory(path);
-                }
-                
-                
-                /*
-                //Create Logs folder if it doesn't exist
-                if (!Directory.Exists(".\\Logs\\"))
-                {
-                    Directory.CreateDirectory(".\\Logs\\");
-                }
-                */
-                
-
-                //Create file if it doesn't exist
-                if (!File.Exists(path + "\\" + today + ".txt"))
-                {
-                    //MessageBox.Show("File Created");
-                    File.Create(path + "\\" + today + ".txt").Dispose();
-                }
 
                 //Concatenate to the Log file
                 using (StreamWriter sw = File.AppendText(path + "\\" + today + ".txt"))
