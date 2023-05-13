@@ -80,6 +80,7 @@ namespace EStorage
             this.comboBox_com.Name = "comboBox_com";
             this.comboBox_com.Size = new System.Drawing.Size(117, 21);
             this.comboBox_com.TabIndex = 1;
+            this.comboBox_com.SelectedIndexChanged += new System.EventHandler(this.comboBox_com_SelectedIndexChanged);
             // 
             // groupBox_scanner
             // 
@@ -150,6 +151,7 @@ namespace EStorage
             this.button_add_item.TabIndex = 20;
             this.button_add_item.Text = "Add";
             this.button_add_item.UseVisualStyleBackColor = true;
+            this.button_add_item.Click += new System.EventHandler(this.button_add_item_Click);
             // 
             // button_remove_item
             // 
@@ -160,6 +162,7 @@ namespace EStorage
             this.button_remove_item.TabIndex = 19;
             this.button_remove_item.Text = "Remove";
             this.button_remove_item.UseVisualStyleBackColor = true;
+            this.button_remove_item.Click += new System.EventHandler(this.button_remove_item_Click);
             // 
             // groupBox_add_sub
             // 
@@ -190,6 +193,7 @@ namespace EStorage
             this.button_item_add.TabIndex = 12;
             this.button_item_add.Text = "+";
             this.button_item_add.UseVisualStyleBackColor = true;
+            this.button_item_add.Click += new System.EventHandler(this.button_item_add_Click);
             // 
             // button_item_remove
             // 
@@ -200,6 +204,7 @@ namespace EStorage
             this.button_item_remove.TabIndex = 13;
             this.button_item_remove.Text = "-";
             this.button_item_remove.UseVisualStyleBackColor = true;
+            this.button_item_remove.Click += new System.EventHandler(this.button_item_remove_Click);
             // 
             // button_item_admin
             // 
@@ -209,6 +214,7 @@ namespace EStorage
             this.button_item_admin.TabIndex = 16;
             this.button_item_admin.Text = "Admin Mode";
             this.button_item_admin.UseVisualStyleBackColor = true;
+            this.button_item_admin.Click += new System.EventHandler(this.button_item_admin_Click);
             // 
             // button_item_update
             // 
@@ -219,6 +225,7 @@ namespace EStorage
             this.button_item_update.TabIndex = 15;
             this.button_item_update.Text = "Update";
             this.button_item_update.UseVisualStyleBackColor = true;
+            this.button_item_update.Click += new System.EventHandler(this.button_item_update_Click);
             // 
             // comboBox_item_category
             // 
@@ -312,6 +319,7 @@ namespace EStorage
             this.listBox_search.Name = "listBox_search";
             this.listBox_search.Size = new System.Drawing.Size(334, 186);
             this.listBox_search.TabIndex = 4;
+            this.listBox_search.DoubleClick += new System.EventHandler(this.listBox_DoubleClick);
             // 
             // groupBox_search
             // 
@@ -344,6 +352,7 @@ namespace EStorage
             this.comboBox_search_category.Name = "comboBox_search_category";
             this.comboBox_search_category.Size = new System.Drawing.Size(128, 21);
             this.comboBox_search_category.TabIndex = 17;
+            this.comboBox_search_category.SelectedIndexChanged += new System.EventHandler(this.comboBox_search_category_SelectedIndexChanged);
             // 
             // comboBox_search_size
             // 
@@ -360,6 +369,7 @@ namespace EStorage
             this.comboBox_search_size.Name = "comboBox_search_size";
             this.comboBox_search_size.Size = new System.Drawing.Size(128, 21);
             this.comboBox_search_size.TabIndex = 16;
+            this.comboBox_search_size.SelectedIndexChanged += new System.EventHandler(this.comboBox_search_size_SelectedIndexChanged);
             // 
             // label_search_category
             // 
@@ -394,6 +404,7 @@ namespace EStorage
             this.textBox_search_name.Name = "textBox_search_name";
             this.textBox_search_name.Size = new System.Drawing.Size(275, 20);
             this.textBox_search_name.TabIndex = 12;
+            this.textBox_search_name.TextChanged += new System.EventHandler(this.textBox_search_name_TextChanged);
             // 
             // groupBox_history
             // 
@@ -424,6 +435,7 @@ namespace EStorage
             this.Controls.Add(this.groupBox_scanner);
             this.Name = "title";
             this.Text = "E-Storage";
+            this.Load += new System.EventHandler(this.title_Load);
             this.groupBox_scanner.ResumeLayout(false);
             this.groupBox_scanner.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
@@ -435,6 +447,7 @@ namespace EStorage
             this.groupBox_search.PerformLayout();
             this.groupBox_history.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.FormClosing += new FormClosingEventHandler(title_FormClosing);
 
         }
 

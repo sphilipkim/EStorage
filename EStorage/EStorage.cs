@@ -487,31 +487,37 @@ namespace EStorage
             //Try Catch
             try
             {
+
+                
                 //AppdataPath
                 string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "E-Storage");
+                Debug.WriteLine(path);
+                
                 //Create E-Storage folder if it doesn't exist
                 if (!Directory.Exists(path))
                 {
                     Directory.CreateDirectory(path);
                 }
-
+                
+                
+                /*
                 //Create Logs folder if it doesn't exist
-                if (!Directory.Exists("%AppData%\\Roaming\\E-Storage\\Logs"))
+                if (!Directory.Exists(".\\Logs\\"))
                 {
-                    Directory.CreateDirectory("%AppData%\\Roaming\\E-Storage\\Logs");
+                    Directory.CreateDirectory(".\\Logs\\");
                 }
-
+                */
                 
 
                 //Create file if it doesn't exist
-                if (!File.Exists(".\\Logs\\" + today + ".txt"))
+                if (!File.Exists(path + "\\" + today + ".txt"))
                 {
                     //MessageBox.Show("File Created");
-                    File.Create(".\\Logs\\" + today + ".txt").Dispose();
+                    File.Create(path + "\\" + today + ".txt").Dispose();
                 }
 
                 //Concatenate to the Log file
-                using (StreamWriter sw = File.AppendText(".\\Logs\\" + today + ".txt"))
+                using (StreamWriter sw = File.AppendText(path + "\\" + today + ".txt"))
                 {
                     sw.WriteLine(hist);
                 }
@@ -684,6 +690,5 @@ namespace EStorage
                 addToHistory("Closing Error: " + ex.Message);
             }
         }
-
     }
 }
