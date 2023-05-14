@@ -19,7 +19,6 @@ namespace EStorage.Classes
         public string itemName { get; set; }
         public int itemCount { get; set; }
         public string itemSize { get; set; }
-        public string itemCategory { get; set; }
 
         //SQL connection
 
@@ -143,69 +142,6 @@ namespace EStorage.Classes
             return dt;
         }
 
-        //Search by name and category
-        public DataTable SearchByNameCat(string search, string category)
-        {
-            SQLiteConnection connect = new SQLiteConnection(connString);
-            DataTable dt = new DataTable();
-
-            try
-            {
-                string sql = "SELECT itemName FROM items WHERE itemCategory=@category AND itemName LIKE @search ORDER BY itemName ASC";
-                SQLiteCommand cmd = new SQLiteCommand(sql, connect);
-
-                cmd.Parameters.AddWithValue("@category", category);
-                cmd.Parameters.AddWithValue("@search", "%" + search + "%");
-
-                SQLiteDataAdapter ad = new SQLiteDataAdapter(cmd);
-
-                connect.Open();
-                ad.Fill(dt);
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("DB SELECT ERROR: " + ex);
-            }
-            finally
-            {
-                connect.Close();
-            }
-
-            return dt;
-        }
-
-        //Search by name, size, and category
-        public DataTable SearchByNameSizeCat(string search, string size, string catagory)
-        {
-            SQLiteConnection connect = new SQLiteConnection(connString);
-            DataTable dt = new DataTable();
-
-            try
-            {
-                string sql = "SELECT itemName FROM items WHERE itemSize=@size AND itemCategory=@category AND itemName LIKE @search ORDER BY itemName ASC";
-                SQLiteCommand cmd = new SQLiteCommand(sql, connect);
-
-                cmd.Parameters.AddWithValue("@size", size);
-                cmd.Parameters.AddWithValue("@category", catagory);
-                cmd.Parameters.AddWithValue("@search", "%" + search + "%");
-
-                SQLiteDataAdapter ad = new SQLiteDataAdapter(cmd);
-
-                connect.Open();
-                ad.Fill(dt);
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("DB SELECT ERROR: " + ex);
-            }
-            finally
-            {
-                connect.Close();
-            }
-
-            return dt;
-        }
-
         //Select by Name (Scan + Search double click)
         public DataTable SelectByName(string name)
         {
@@ -245,13 +181,12 @@ namespace EStorage.Classes
 
             try
             {
-                string sql = "INSERT INTO items (itemName, itemCount, itemSize, itemCategory) VALUES (@itemName, @itemCount, @itemSize, @itemCategory)";
+                string sql = "INSERT INTO items (itemName, itemCount, itemSize) VALUES (@itemName, @itemCount, @itemSize)";
                 SQLiteCommand cmd = new SQLiteCommand(sql, connect);
 
                 cmd.Parameters.AddWithValue("@itemName", i.itemName);
                 cmd.Parameters.AddWithValue("@itemCount", i.itemCount);
                 cmd.Parameters.AddWithValue("@itemSize", i.itemSize);
-                cmd.Parameters.AddWithValue("@itemCategory", i.itemCategory);
 
                 connect.Open();
                 int rows = cmd.ExecuteNonQuery();
@@ -356,14 +291,13 @@ namespace EStorage.Classes
 
             try
             {
-                string sql = "UPDATE items SET itemName=@itemName, itemCount=@itemCount, itemSize=@itemSize, itemCategory=@itemCategory WHERE itemID=@itemID";
+                string sql = "UPDATE items SET itemName=@itemName, itemCount=@itemCount, itemSize=@itemSize WHERE itemID=@itemID";
                 SQLiteCommand cmd = new SQLiteCommand(sql, connect);
 
                 cmd.Parameters.AddWithValue("@itemID", i.itemID);
                 cmd.Parameters.AddWithValue("@itemName", i.itemName);
                 cmd.Parameters.AddWithValue("@itemCount", i.itemCount);
                 cmd.Parameters.AddWithValue("@itemSize", i.itemSize);
-                cmd.Parameters.AddWithValue("@itemCategory", i.itemCategory);
 
                 connect.Open();
                 int rows = cmd.ExecuteNonQuery();

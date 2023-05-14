@@ -47,9 +47,7 @@ namespace EStorage
             this.button_item_remove = new System.Windows.Forms.Button();
             this.button_item_admin = new System.Windows.Forms.Button();
             this.button_item_update = new System.Windows.Forms.Button();
-            this.comboBox_item_category = new System.Windows.Forms.ComboBox();
             this.comboBox_item_size = new System.Windows.Forms.ComboBox();
-            this.label_item_category = new System.Windows.Forms.Label();
             this.label_item_size = new System.Windows.Forms.Label();
             this.label_item_count = new System.Windows.Forms.Label();
             this.textBox_item_count = new System.Windows.Forms.TextBox();
@@ -57,9 +55,7 @@ namespace EStorage
             this.textBox_item_name = new System.Windows.Forms.TextBox();
             this.listBox_search = new System.Windows.Forms.ListBox();
             this.groupBox_search = new System.Windows.Forms.GroupBox();
-            this.comboBox_search_category = new System.Windows.Forms.ComboBox();
             this.comboBox_search_size = new System.Windows.Forms.ComboBox();
-            this.label_search_category = new System.Windows.Forms.Label();
             this.label_search_size = new System.Windows.Forms.Label();
             this.label_search_name = new System.Windows.Forms.Label();
             this.textBox_search_name = new System.Windows.Forms.TextBox();
@@ -127,9 +123,7 @@ namespace EStorage
             this.groupBox_item.Controls.Add(this.groupBox_add_sub);
             this.groupBox_item.Controls.Add(this.button_item_admin);
             this.groupBox_item.Controls.Add(this.button_item_update);
-            this.groupBox_item.Controls.Add(this.comboBox_item_category);
             this.groupBox_item.Controls.Add(this.comboBox_item_size);
-            this.groupBox_item.Controls.Add(this.label_item_category);
             this.groupBox_item.Controls.Add(this.label_item_size);
             this.groupBox_item.Controls.Add(this.label_item_count);
             this.groupBox_item.Controls.Add(this.textBox_item_count);
@@ -227,23 +221,6 @@ namespace EStorage
             this.button_item_update.UseVisualStyleBackColor = true;
             this.button_item_update.Click += new System.EventHandler(this.button_item_update_Click);
             // 
-            // comboBox_item_category
-            // 
-            this.comboBox_item_category.Enabled = false;
-            this.comboBox_item_category.FormattingEnabled = true;
-            this.comboBox_item_category.Items.AddRange(new object[] {
-            "",
-            "Christmas",
-            "Halloween",
-            "Thanksgiving",
-            "Easter",
-            "Valentines",
-            "New Years"});
-            this.comboBox_item_category.Location = new System.Drawing.Point(75, 105);
-            this.comboBox_item_category.Name = "comboBox_item_category";
-            this.comboBox_item_category.Size = new System.Drawing.Size(155, 21);
-            this.comboBox_item_category.TabIndex = 11;
-            // 
             // comboBox_item_size
             // 
             this.comboBox_item_size.Enabled = false;
@@ -259,15 +236,6 @@ namespace EStorage
             this.comboBox_item_size.Name = "comboBox_item_size";
             this.comboBox_item_size.Size = new System.Drawing.Size(155, 21);
             this.comboBox_item_size.TabIndex = 10;
-            // 
-            // label_item_category
-            // 
-            this.label_item_category.AutoSize = true;
-            this.label_item_category.Location = new System.Drawing.Point(16, 107);
-            this.label_item_category.Name = "label_item_category";
-            this.label_item_category.Size = new System.Drawing.Size(49, 13);
-            this.label_item_category.TabIndex = 7;
-            this.label_item_category.Text = "Category";
             // 
             // label_item_size
             // 
@@ -311,6 +279,7 @@ namespace EStorage
             this.textBox_item_name.ReadOnly = true;
             this.textBox_item_name.Size = new System.Drawing.Size(224, 20);
             this.textBox_item_name.TabIndex = 0;
+            this.textBox_item_name.TextChanged += new System.EventHandler(this.textBox_item_name_TextChanged);
             // 
             // listBox_search
             // 
@@ -323,9 +292,7 @@ namespace EStorage
             // 
             // groupBox_search
             // 
-            this.groupBox_search.Controls.Add(this.comboBox_search_category);
             this.groupBox_search.Controls.Add(this.comboBox_search_size);
-            this.groupBox_search.Controls.Add(this.label_search_category);
             this.groupBox_search.Controls.Add(this.label_search_size);
             this.groupBox_search.Controls.Add(this.label_search_name);
             this.groupBox_search.Controls.Add(this.textBox_search_name);
@@ -336,23 +303,6 @@ namespace EStorage
             this.groupBox_search.TabIndex = 5;
             this.groupBox_search.TabStop = false;
             this.groupBox_search.Text = "Search";
-            // 
-            // comboBox_search_category
-            // 
-            this.comboBox_search_category.FormattingEnabled = true;
-            this.comboBox_search_category.Items.AddRange(new object[] {
-            "",
-            "Christmas",
-            "Halloween",
-            "Thanksgiving",
-            "Easter",
-            "Valentines",
-            "New Years"});
-            this.comboBox_search_category.Location = new System.Drawing.Point(64, 260);
-            this.comboBox_search_category.Name = "comboBox_search_category";
-            this.comboBox_search_category.Size = new System.Drawing.Size(128, 21);
-            this.comboBox_search_category.TabIndex = 17;
-            this.comboBox_search_category.SelectedIndexChanged += new System.EventHandler(this.comboBox_search_category_SelectedIndexChanged);
             // 
             // comboBox_search_size
             // 
@@ -370,15 +320,6 @@ namespace EStorage
             this.comboBox_search_size.Size = new System.Drawing.Size(128, 21);
             this.comboBox_search_size.TabIndex = 16;
             this.comboBox_search_size.SelectedIndexChanged += new System.EventHandler(this.comboBox_search_size_SelectedIndexChanged);
-            // 
-            // label_search_category
-            // 
-            this.label_search_category.AutoSize = true;
-            this.label_search_category.Location = new System.Drawing.Point(6, 263);
-            this.label_search_category.Name = "label_search_category";
-            this.label_search_category.Size = new System.Drawing.Size(49, 13);
-            this.label_search_category.TabIndex = 15;
-            this.label_search_category.Text = "Category";
             // 
             // label_search_size
             // 
@@ -435,6 +376,7 @@ namespace EStorage
             this.Controls.Add(this.groupBox_scanner);
             this.Name = "title";
             this.Text = "E-Storage";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.title_FormClosing);
             this.Load += new System.EventHandler(this.title_Load);
             this.groupBox_scanner.ResumeLayout(false);
             this.groupBox_scanner.PerformLayout();
@@ -447,7 +389,6 @@ namespace EStorage
             this.groupBox_search.PerformLayout();
             this.groupBox_history.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.FormClosing += new FormClosingEventHandler(title_FormClosing);
 
         }
 
@@ -461,12 +402,10 @@ namespace EStorage
         private GroupBox groupBox_item;
         private Label label_item_name;
         private TextBox textBox_item_name;
-        private Label label_item_category;
         private Label label_item_size;
         private Label label_item_count;
         private TextBox textBox_item_count;
         private ComboBox comboBox_item_size;
-        private ComboBox comboBox_item_category;
         private Button button_item_update_size;
         private Button button_item_remove;
         private Button button_item_add;
@@ -474,9 +413,7 @@ namespace EStorage
         private Button button_item_admin;
         private ListBox listBox_search;
         private GroupBox groupBox_search;
-        private ComboBox comboBox_search_category;
         private ComboBox comboBox_search_size;
-        private Label label_search_category;
         private Label label_search_size;
         private Label label_search_name;
         private TextBox textBox_search_name;

@@ -1,11 +1,12 @@
 ﻿using EStorage;
+using EStorage.Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace EStorage2
+namespace EStorage
 {
     internal static class Program
     {
@@ -20,6 +21,8 @@ namespace EStorage2
 
             DataHelper.InitializeLogs();
             DataHelper.InitializeDB();
+
+            DataHelper.UpdateDB();
 
             Application.Run(new title());
         }

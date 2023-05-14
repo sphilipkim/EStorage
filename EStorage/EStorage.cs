@@ -21,16 +21,20 @@ namespace EStorage
         SerialPort port = new SerialPort();
         itemClass i = new itemClass();
         string searchSize = "";
-        string searchCategory = "";
         string searchName = "";
         string[] searchItems;
         bool isAdmin = false;
+        List<string> sizeList;
+        List<string> sList;
 
         //Initialization
         public title()
         {
             InitializeComponent();
             list_available_ports();
+            sizeList = SizeHelper.readSizeFile();
+            sList = SizeHelper.readSizeShortFile();
+            setSizeComboBoxes(sizeList);
         }
 
         //On UI load
@@ -50,6 +54,17 @@ namespace EStorage
             String[] ports = SerialPort.GetPortNames();
             //Add ports to comboBox
             comboBox_com.Items.AddRange(ports);
+        }
+
+        //Sets Size combo box item values
+        private void setSizeComboBoxes(List<string> sList)
+        {
+            BindingSource bs_Item = new BindingSource();
+            BindingSource bs_Search = new BindingSource();
+            bs_Item.DataSource = sizeList.Prepend("");
+            comboBox_item_size.DataSource = bs_Item;
+            bs_Search.DataSource = sizeList.Prepend("");
+            comboBox_search_size.DataSource = bs_Search;
         }
 
         //On changing comboBox, open new port
@@ -128,7 +143,6 @@ namespace EStorage
                         i.itemName = st[1];
                         i.itemCount = Int32.Parse(st[2]);
                         i.itemSize = st[3];
-                        i.itemCategory = st[4];
                         success = true;
                         //Log item found
                         addToHistory("Item Found: " + i.itemName);
@@ -269,20 +283,16 @@ namespace EStorage
             {
                 //Store item's previous settings for Log
                 string prevSize = i.itemSize;
-                string prevCat = i.itemCategory;
 
                 //Set new item values
                 i.itemName = textBox_item_name.Text;
                 i.itemCount = Int32.Parse(textBox_item_count.Text);
                 i.itemSize = comboBox_item_size.Text;
-                i.itemCategory = comboBox_item_category.Text;
-
-                //Debug.Write("**********\n" + i.itemID.ToString() + "\n" + i.itemName + "\n" + i.itemCount.ToString() + "\n" + i.itemSize + "\n" + i.itemCategory + "\n**********");
 
                 //Update table and Log results
                 if (i.Update(i))
                 {
-                    addToHistory("Updated Item: " + i.itemName + " - Size: " + (!(prevSize.Equals(i.itemSize)) ? prevSize + " --> " + i.itemSize : i.itemSize) + ", Category: " + (!(prevCat.Equals(i.itemCategory)) ? prevCat + " --> " + i.itemCategory : i.itemCategory));
+                    addToHistory("Updated Item: " + i.itemName + " - Size: " + (!(prevSize.Equals(i.itemSize)) ? prevSize + " --> " + i.itemSize : i.itemSize));
                     clearFields();
                 }
                 else
@@ -302,7 +312,6 @@ namespace EStorage
                 i.itemName = textBox_item_name.Text;
                 i.itemCount += Int32.Parse(textBox_add_sub.Text);
                 i.itemSize = comboBox_item_size.Text;
-                i.itemCategory = comboBox_item_category.Text;
 
                 //Update table and Log results
                 if (i.Update(i))
@@ -336,7 +345,6 @@ namespace EStorage
                 i.itemName = textBox_item_name.Text;
                 i.itemCount -= Int32.Parse(textBox_add_sub.Text);
                 i.itemSize = comboBox_item_size.Text;
-                i.itemCategory = comboBox_item_category.Text;
 
                 //Update table and Log results
                 if (i.Update(i))
@@ -368,13 +376,6 @@ namespace EStorage
             updateSearch();
         }
 
-        //Update searchCategory on search query
-        private void comboBox_search_category_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            searchCategory = comboBox_search_category.Text;
-            updateSearch();
-        }
-
         //Update name on search query
         private void textBox_search_name_TextChanged(object sender, EventArgs e)
         {
@@ -389,7 +390,7 @@ namespace EStorage
             DataTable dt = new DataTable();
 
             //Only name
-            if (searchSize.Length <= 0 && searchCategory.Length <= 0)
+            if (searchSize.Length <= 0)
             {
                 //Try Catch
                 try
@@ -406,7 +407,7 @@ namespace EStorage
                 }
             }
             //Name and Size
-            else if (searchSize.Length > 0 && searchCategory.Length <= 0)
+            else if (searchSize.Length > 0)
             {
                 //Try Catch
                 try
@@ -419,38 +420,6 @@ namespace EStorage
                     //Debug and Log Error
                     Debug.WriteLine("SEARCH ERROR(n,s): " + ex);
                     addToHistory("Search(n,s) Error: " + ex.Message);
-                }
-            }
-            //Name and Category
-            else if (searchSize.Length <= 0 && searchCategory.Length > 0)
-            {
-                //Try Catch
-                try
-                {
-                    //Query
-                    dt = i.SearchByNameCat(searchName, searchCategory);
-                }
-                catch (Exception ex)
-                {
-                    //Debug and Log Error
-                    Debug.WriteLine("SEARCH ERROR(n,c): " + ex);
-                    addToHistory("Search(n,c) Error: " + ex.Message);
-                }
-            }
-            //Name, Size, and Category
-            else if (searchSize.Length > 0 && searchCategory.Length > 0)
-            {
-                //Try Catch
-                try
-                {
-                    //Query
-                    dt = i.SearchByNameSizeCat(searchName, searchSize, searchCategory);
-                }
-                catch (Exception ex)
-                {
-                    //Debug and Log Error
-                    Debug.WriteLine("SEARCH ERROR(n,s,c): " + ex);
-                    addToHistory("Search(n,s,c) Error: " + ex.Message);
                 }
             }
 
@@ -535,7 +504,6 @@ namespace EStorage
                 textBox_item_name.ReadOnly = false;
                 textBox_item_count.ReadOnly = false;
                 comboBox_item_size.Enabled = true;
-                comboBox_item_category.Enabled = true;
                 button_item_admin.Text = "Admin ON!";
 
                 isAdmin = true;
@@ -589,11 +557,23 @@ namespace EStorage
         //Add new item using Admin Mode
         private void button_add_item_Click(object sender, EventArgs e)
         {
-            //Set itembox items to item
-            i.itemName = textBox_item_name.Text;
-            i.itemCount = Int32.Parse(textBox_item_count.Text);
-            i.itemSize = comboBox_item_size.Text;
-            i.itemCategory = comboBox_item_category.Text;
+            //Set last token to upper
+            string[] tokens = textBox_item_name.Text.Split(' ');
+            tokens[tokens.Length - 1] = tokens[tokens.Length - 1].ToUpper();
+
+            try
+            {
+                //Set itembox items to item
+                i.itemName = string.Join(" ", tokens);
+                i.itemCount = Int32.Parse(textBox_item_count.Text);
+                i.itemSize = comboBox_item_size.Text;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Name and Amount cannot be empty!");
+                addToHistory("Adding Item Error: Name or Amount was empty");
+                return;
+            }
 
             //Check item doesn't exist
             if (i.SelectByName(i.itemName).Rows.Count > 0)
@@ -607,7 +587,7 @@ namespace EStorage
             //Insert item and Log results
             if (i.Insert(i))
             {
-                addToHistory("Added new item: " + i.itemName + ", Amount: " + i.itemCount + ", Size: " + i.itemSize + ", Category" + i.itemCategory);
+                addToHistory("Added new item: " + i.itemName + ", Amount: " + i.itemCount + ", Size: " + i.itemSize);
                 //Update search screen to reflect
                 updateSearch();
                 clearFields();
@@ -626,11 +606,9 @@ namespace EStorage
             textBox_item_name.Text = item.itemName;
             textBox_item_count.Text = item.itemCount.ToString();
             comboBox_item_size.Text = item.itemSize;
-            comboBox_item_category.Text = item.itemCategory;
 
             //Enable buttons and boxes
             comboBox_item_size.Enabled = true;
-            comboBox_item_category.Enabled = true;
             button_item_update.Enabled = true;
             textBox_add_sub.Enabled = true;
             button_item_add.Enabled = true;
@@ -677,7 +655,17 @@ namespace EStorage
             textBox_item_name.Clear();
             textBox_item_count.Clear();
             comboBox_item_size.Text = string.Empty;
-            comboBox_item_category.Text = string.Empty;
+        }
+
+        //As item name is being typed
+        private void textBox_item_name_TextChanged(object sender, EventArgs e)
+        {
+            string text = textBox_item_name.Text;
+
+            if (SizeHelper.getSize(text, sList, sizeList) != null)
+            {
+                comboBox_item_size.Text = SizeHelper.getSize(text, sList, sizeList);
+            }
         }
     }
 }

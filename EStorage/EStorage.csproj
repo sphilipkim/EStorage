@@ -68,6 +68,7 @@
   <ItemGroup>
     <Compile Include="Classes\DataHelper.cs" />
     <Compile Include="Classes\itemClass.cs" />
+    <Compile Include="Classes\SizeHelper.cs" />
     <Compile Include="EStorage.cs">
       <SubType>Form</SubType>
     </Compile>
