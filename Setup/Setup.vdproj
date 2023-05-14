@@ -87,8 +87,20 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_DC06BA6F403C471BB46C3FDA883C7A01"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_EA4BF9D987587261120BC1EFD0021647"
         "OwnerKey" = "8:_FBB99ED402EA4B2BBDA4CE5787F16CB9"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_F83C008BBE344CCE9B86035B9924051C"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -179,7 +191,7 @@
         "DisplayName" = "8:Release"
         "IsDebugOnly" = "11:FALSE"
         "IsReleaseOnly" = "11:TRUE"
-        "OutputFilename" = "8:Release\\Setup.msi"
+        "OutputFilename" = "8:Release\\E-Storage Setup.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -459,6 +471,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DC06BA6F403C471BB46C3FDA883C7A01"
+            {
+            "SourcePath" = "8:..\\EStorage\\bin\\Debug\\Sizes.txt"
+            "TargetName" = "8:Sizes.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_8B8078EDAD054CF59F93369EE8D35F58"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_EA4BF9D987587261120BC1EFD0021647"
             {
             "AssemblyRegister" = "3:1"
@@ -488,6 +520,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F83C008BBE344CCE9B86035B9924051C"
+            {
+            "SourcePath" = "8:..\\EStorage\\bin\\Debug\\SizesShort.txt"
+            "TargetName" = "8:SizesShort.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_8B8078EDAD054CF59F93369EE8D35F58"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
         }
@@ -579,15 +631,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:E-Storage"
-        "ProductCode" = "8:{E36EBEFF-168B-461C-B29F-D604620DF9C9}"
-        "PackageCode" = "8:{F213971D-F5DC-4B67-838C-89DBF17B4F6C}"
+        "ProductCode" = "8:{1E78C872-2512-475F-8FF0-5DB698421070}"
+        "PackageCode" = "8:{B30CB1FA-208C-4EE9-AE2D-6C109BB92006}"
         "UpgradeCode" = "8:{CD20DDB9-78FE-47AD-86D2-CB59B294E696}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.3"
+        "ProductVersion" = "8:1.0.4"
         "Manufacturer" = "8:Subin Kim"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -704,28 +756,28 @@
             {
             "Name" = "8:E-Storage"
             "Arguments" = "8:"
-            "Description" = "8:"
+            "Description" = "8:A small E-Storage project"
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
             "Target" = "8:_FBB99ED402EA4B2BBDA4CE5787F16CB9"
             "Folder" = "8:_A7D1AB72C48E4D4CB3F7F3AF6383A1EF"
             "WorkingFolder" = "8:_8B8078EDAD054CF59F93369EE8D35F58"
-            "Icon" = "8:"
+            "Icon" = "8:_9B6D5F55514A4EAEBEB505E1AA7082E1"
             "Feature" = "8:"
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_F4E94CCCDFB64596B5DA7D6B81429206"
             {
             "Name" = "8:E-Storage"
             "Arguments" = "8:"
-            "Description" = "8:"
+            "Description" = "8:A small E-Storage project"
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
             "Target" = "8:_FBB99ED402EA4B2BBDA4CE5787F16CB9"
             "Folder" = "8:_9C5AAC57E19E45CEAF2A06C9F37697D3"
             "WorkingFolder" = "8:_8B8078EDAD054CF59F93369EE8D35F58"
-            "Icon" = "8:"
+            "Icon" = "8:_9B6D5F55514A4EAEBEB505E1AA7082E1"
             "Feature" = "8:"
             }
         }
